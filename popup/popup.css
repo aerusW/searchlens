@@ -201,3 +201,56 @@ body {
   color: #555;
   margin-top: 4px;
 }
+
+/* Group labels */
+.sl-group-label {
+  padding: 8px 14px 4px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: #444;
+  background: #0e0e1a;
+  border-top: 1px solid #1c1c2e;
+  border-bottom: 1px solid #1c1c2e;
+}
+
+.sl-group-label--search { margin-top: 4px; }
+
+.sl-sublabel {
+  font-size: 10px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #3a3a5a;
+}
+
+/* Footer apply button */
+.sl-footer {
+  padding: 10px 14px;
+  background: #0e0e1a;
+  border-top: 1px solid #1c1c2e;
+}
+
+.sl-apply-btn {
+  width: 100%;
+  padding: 7px;
+  background: #003d44;
+  border: 1px solid #00838f;
+  border-radius: 5px;
+  color: #00e5ff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+
+.sl-apply-btn:hover {
+  background: #005058;
+  border-color: #00bcd4;
+}
+
+.sl-apply-btn.sl-applied {
+  background: #004d00;
+  border-color: #00c853;
+  color: #69ff47;
+}
