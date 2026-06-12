@@ -75,9 +75,31 @@ function applyImages() {
   }
 }
 
+// --- Filetypes ---
+function applyFiletypes() {
+  const results = getResultElements();
+  results.forEach(el => {
+    if (!settings.filetypes.length) {
+      if (el.dataset.slFiletype) {
+        el.classList.remove('searchlens-hidden');
+        delete el.dataset.slFiletype;
+      }
+      return;
+    }
+    const url = getResultURL(el);
+    if (!url) return;
+    const path = url.pathname.toLowerCase();
+    const matches = settings.filetypes.some(ext => path.endsWith('.' + ext));
+    el.classList.toggle('searchlens-hidden', !matches);
+    if (!matches) el.dataset.slFiletype = '1';
+    else delete el.dataset.slFiletype;
+  });
+}
+
 function applyDOM() {
   applySponsored();
   applyImages();
+  applyFiletypes();
 }
 
 function applyURLParams() {
