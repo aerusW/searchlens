@@ -14,7 +14,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   const s = await load();
   initSponsored(s);
   initImages(s);
+  initFiletypes(s);
 });
+
+function initFiletypes(s) {
+  document.querySelectorAll('#filetypeChips input').forEach(cb => {
+    cb.checked = s.filetypes.includes(cb.value);
+    cb.addEventListener('change', () => {
+      const active = [...document.querySelectorAll('#filetypeChips input:checked')]
+        .map(i => i.value);
+      save({ filetypes: active });
+    });
+  });
+}
 
 function initImages(s) {
   const el = document.getElementById('showImages');
