@@ -1,0 +1,203 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  width: 300px;
+  background: #12121e;
+  color: #e0e0e0;
+  font: 13px/1.5 system-ui, sans-serif;
+}
+
+/* Header */
+.sl-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #1a1a2e;
+  border-bottom: 1px solid #2a2a3e;
+}
+
+.sl-logo { width: 22px; height: 22px; }
+
+.sl-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  color: #00bcd4;
+}
+
+/* Sections */
+.sl-section {
+  padding: 10px 14px;
+  border-bottom: 1px solid #1c1c2e;
+}
+
+.sl-section:last-of-type { border-bottom: none; }
+
+.sl-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+/* Toggle row */
+.sl-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Switch */
+.sl-switch {
+  position: relative;
+  width: 34px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.sl-switch input { opacity: 0; width: 0; height: 0; }
+
+.sl-slider {
+  position: absolute;
+  inset: 0;
+  background: #2a2a3e;
+  border-radius: 18px;
+  transition: background .2s;
+  cursor: pointer;
+}
+
+.sl-slider::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: 3px;
+  top: 3px;
+  background: #555;
+  border-radius: 50%;
+  transition: transform .2s, background .2s;
+}
+
+.sl-switch input:checked + .sl-slider { background: #00838f; }
+.sl-switch input:checked + .sl-slider::after {
+  transform: translateX(16px);
+  background: #00e5ff;
+}
+
+/* Chips */
+.sl-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.sl-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  background: #1e1e30;
+  border: 1px solid #2a2a3e;
+  border-radius: 10px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: border-color .15s, background .15s, color .15s;
+  user-select: none;
+}
+
+.sl-chip input { display: none; }
+
+.sl-chip:has(input:checked) {
+  background: #003d44;
+  border-color: #00bcd4;
+  color: #00e5ff;
+}
+
+/* Removable chips (domain filter) */
+.sl-chip-rm {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background: #003d44;
+  border: 1px solid #00838f;
+  border-radius: 10px;
+  font-size: 11px;
+  color: #00e5ff;
+}
+
+.sl-chip-rm button {
+  background: none;
+  border: none;
+  color: #00838f;
+  cursor: pointer;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1;
+  transition: color .15s;
+}
+
+.sl-chip-rm button:hover { color: #ff5252; }
+
+/* Select */
+.sl-select {
+  width: 100%;
+  padding: 5px 8px;
+  background: #1e1e30;
+  border: 1px solid #2a2a3e;
+  border-radius: 5px;
+  color: #e0e0e0;
+  font-size: 12px;
+  outline: none;
+}
+
+.sl-select:focus { border-color: #00bcd4; }
+
+/* Inputs */
+.sl-input {
+  flex: 1;
+  padding: 5px 8px;
+  background: #1e1e30;
+  border: 1px solid #2a2a3e;
+  border-radius: 5px;
+  color: #e0e0e0;
+  font-size: 12px;
+  outline: none;
+}
+
+.sl-input:focus { border-color: #00bcd4; }
+.sl-input-full  { width: 100%; }
+
+.sl-add-row {
+  display: flex;
+  gap: 5px;
+  margin-top: 7px;
+  align-items: center;
+}
+
+.sl-btn-add {
+  padding: 0 9px;
+  height: 28px;
+  background: #1e1e30;
+  border: 1px solid #2a2a3e;
+  border-radius: 5px;
+  color: #00bcd4;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+
+.sl-btn-add:hover {
+  background: #003d44;
+  border-color: #00bcd4;
+}
+
+.sl-hint {
+  font-size: 10px;
+  color: #555;
+  margin-top: 4px;
+}
