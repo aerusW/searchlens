@@ -30,7 +30,7 @@ const SPONSORED_SELECTORS = {
 
 // ── Image-block selectors ───────────────────────────────────────────────────
 const IMAGE_SELECTORS = {
-  google:     ['#imagebox_bigimages', '.XR7mYd', 'g-section-with-header'],
+  google:     ['.Lv2Cle'],
   duckduckgo: ['.zci--images', '.tile--img'],
   bing:       ['#vm-web', '.b_imageCaptionCell'],
 };
