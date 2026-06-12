@@ -13,7 +13,6 @@ const SPONSORED_SELECTORS = {
   google: [
     '#tads',
     '#tadsb',
-    '#slim_appbar',
     '[data-text-ad]',
     '.commercial-unit-desktop-top',
     '.commercial-unit-desktop-rhs',
@@ -35,6 +34,11 @@ const IMAGE_SELECTORS = {
   google:     ['.Lv2Cle'],
   duckduckgo: ['.zci--images', '.tile--img'],
   bing:       ['#vm-web', '.b_imageCaptionCell'],
+};
+
+// ── Always-hidden UI clutter (not toggle-dependent) ─────────────────────────
+const ALWAYS_HIDDEN = {
+  google: ['#slim_appbar'],
 };
 
 // ── State ───────────────────────────────────────────────────────────────────
@@ -213,7 +217,19 @@ function applyURLParams() {
 }
 
 // ── Main apply ──────────────────────────────────────────────────────────────
+function applyAlwaysHidden() {
+  const sels = ALWAYS_HIDDEN[engine];
+  if (!sels) return;
+  for (const sel of sels) {
+    try {
+      document.querySelectorAll(sel).forEach(el =>
+        el.classList.add('searchlens-hidden'));
+    } catch { /* invalid selector */ }
+  }
+}
+
 function applyDOM() {
+  applyAlwaysHidden();
   applySponsored();
   applyImages();
   applyProducts();
