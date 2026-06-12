@@ -15,7 +15,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   initSponsored(s);
   initImages(s);
   initFiletypes(s);
+  initLanguage(s);
 });
+
+function initLanguage(s) {
+  const el = document.getElementById('language');
+  el.value = s.language;
+  el.addEventListener('change', () => save({ language: el.value }));
+}
 
 function initFiletypes(s) {
   document.querySelectorAll('#filetypeChips input').forEach(cb => {

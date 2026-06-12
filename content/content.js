@@ -103,7 +103,23 @@ function applyDOM() {
 }
 
 function applyURLParams() {
-  // implemented by feature/language-filter and feature/site-search
+  if (engine !== 'google') return;
+  const url = new URL(location.href);
+  let changed = false;
+
+  // Language (lr=lang_XX)
+  if (settings.language) {
+    const want = 'lang_' + settings.language;
+    if (url.searchParams.get('lr') !== want) {
+      url.searchParams.set('lr', want);
+      changed = true;
+    }
+  } else if (url.searchParams.has('lr')) {
+    url.searchParams.delete('lr');
+    changed = true;
+  }
+
+  if (changed) location.replace(url.toString());
 }
 
 function observe() {
