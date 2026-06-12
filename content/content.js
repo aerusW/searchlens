@@ -13,6 +13,7 @@ const SPONSORED_SELECTORS = {
   google: [
     '#tads',
     '#tadsb',
+    '#slim_appbar',
     '[data-text-ad]',
     '.commercial-unit-desktop-top',
     '.commercial-unit-desktop-rhs',
