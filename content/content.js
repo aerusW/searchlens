@@ -175,13 +175,12 @@ function init() {
   });
 
   browser.storage.onChanged.addListener((changes) => {
-    const urlKeys = new Set(['language', 'siteFilter']);
-    let needsURL = false;
+    let applyURL = false;
     for (const [k, { newValue }] of Object.entries(changes)) {
-      settings[k] = newValue;
-      if (urlKeys.has(k)) needsURL = true;
+      if (k === '_apply') { applyURL = true; continue; }
+      if (k in settings) settings[k] = newValue;
     }
-    if (needsURL) applyURLParams();
+    if (applyURL) applyURLParams();
     applyDOM();
   });
 }
