@@ -1,10 +1,11 @@
 const DEFAULTS = {
-  hideSponsored: true,
-  showImages:    true,
-  filetypes:     [],
-  language:      '',
-  domains:       [],
-  siteFilter:    '',
+  hideSponsored:  true,
+  showImages:     true,
+  hideProducts:   false,
+  filetypes:      [],
+  language:       '',
+  domains:        [],
+  siteFilter:     '',
 };
 
 async function load()        { return browser.storage.local.get(DEFAULTS); }
@@ -16,6 +17,12 @@ function initSponsored(s) {
   const el = document.getElementById('hideSponsored');
   el.checked = s.hideSponsored;
   el.addEventListener('change', () => save({ hideSponsored: el.checked }));
+}
+
+function initProducts(s) {
+  const el = document.getElementById('hideProducts');
+  el.checked = s.hideProducts;
+  el.addEventListener('change', () => save({ hideProducts: el.checked }));
 }
 
 function initImages(s) {
@@ -114,6 +121,7 @@ function initApplyButton() {
 document.addEventListener('DOMContentLoaded', async () => {
   const s = await load();
   initSponsored(s);
+  initProducts(s);
   initImages(s);
   initFiletypes(s);
   initDomains(s);
