@@ -1,59 +1,88 @@
 # SearchLens
 
-A Firefox extension to refine search results. Hides sponsored content by default, with a configurable filter panel to control what you see across Google, DuckDuckGo, Bing, Brave Search, and Yahoo.
+> A Firefox extension that puts you in control of your search results — hide ads, products, and image carousels, or filter by file type, domain, language, and site.
 
-## Features
+<p align="center">
+  <img src="assets/panel.svg" alt="SearchLens filter panel" width="300">
+</p>
 
-| Feature | Description |
-|---|---|
-| **Hide sponsored** | Toggle sponsored/ad results on or off |
-| **Show images** | Toggle image-result blocks (e.g. Google's "Images for…" rows) |
-| **File type** | Show only results linking to selected file types (PDF, DOC, XLS, PPT, TXT, CSV) |
-| **Language** | Restrict Google results to a specific language via `lr=lang_XX` |
-| **Domain** | Show only results from selected TLDs (`.com`, `.it`, `.be`, …); supports custom entries |
-| **Site** | Restrict results to a specific site via `site:example.com` appended to the query |
+---
 
 ## Installation
 
-SearchLens is designed for **Zen Browser** (and other Firefox forks with extension signature enforcement disabled), so no AMO signing is required.
+SearchLens targets **Zen Browser** and Firefox forks with signature enforcement disabled — no AMO signing needed.
 
-### Temporary (development)
-
-1. Open `about:debugging` → **This Firefox** → **Load Temporary Add-on**
-2. Select `manifest.json` from this folder
-
-### Permanent (.xpi)
+**Permanent install**
 
 ```bash
-npx web-ext build
-# or, if web-ext is installed globally:
 web-ext build
+# generates web-ext-artifacts/searchlens-1.1.0.xpi
 ```
 
-Then install the generated `.xpi` via **about:addons** → gear icon → **Install Add-on From File**.
+Install via `about:addons` → gear icon → **Install Add-on From File**.
+
+**Development (temporary)**
+
+`about:debugging` → **This Firefox** → **Load Temporary Add-on** → select `manifest.json`.
+
+---
+
+## Filters
+
+<p align="center">
+  <img src="assets/overview.svg" alt="What SearchLens filters on a Google results page" width="640">
+</p>
+
+### Page filters — apply instantly
+
+| Toggle | What it hides |
+|---|---|
+| **Hide sponsored** | Ad blocks (`#tads`, `#tadsb`) and the empty `#slim_appbar` divider |
+| **Hide products** | Shopping / product carousel (`product-viewer-group`) |
+| **Show images** | Image results strip (`.Lv2Cle`) |
+| **Domain** | Any result not from your selected TLDs — add custom entries with the `+` input |
+
+### Search filters — click Apply to search
+
+These modify the Google query and reload the page.
+
+| Filter | How it works |
+|---|---|
+| **File type** | Adds `filetype:pdf` (or any combo) to the query |
+| **Language** | Adds `lr=lang_XX` to the URL |
+| **Site** | Appends `site:example.com` to the query |
+
+---
 
 ## How it works
 
-A content script is injected into matching search pages. On load it reads settings from `browser.storage.local`, applies DOM-based filters (hide/show elements by CSS class), and sets up a `MutationObserver` to handle dynamically injected content. URL-based filters (language, site) modify the search URL and redirect once if needed.
+The content script runs on every matching search page. On load it reads settings from `browser.storage.local` and applies DOM-based filters by toggling a `display: none` class. A debounced `MutationObserver` re-applies filters whenever Google injects content dynamically.
 
-Clicking the extension icon opens the filter panel where every setting persists automatically.
+Search filters (language, site, filetype) skip the DOM entirely — they rewrite the search URL directly and let Google do the filtering server-side.
+
+---
 
 ## Supported engines
 
-- Google (`.com`, `.it`, `.co.uk`, `.de`, `.fr`, `.be`)
-- DuckDuckGo
-- Bing
-- Brave Search
-- Yahoo Search
+Page filters work across all engines. Search filters (language, site, filetype) are Google-only.
+
+| Engine | Sponsored | Images | Products | Domain | Search filters |
+|---|---|---|---|---|---|
+| Google | ✓ | ✓ | ✓ | ✓ | ✓ |
+| DuckDuckGo | ✓ | ✓ | — | ✓ | — |
+| Bing | ✓ | ✓ | — | ✓ | — |
+| Brave Search | ✓ | — | — | ✓ | — |
+| Yahoo | ✓ | — | — | ✓ | — |
+
+---
 
 ## Development
 
-No build step required — plain JavaScript, HTML, and CSS.
+No build step — plain JS, HTML, CSS.
 
 ```bash
 git clone https://github.com/aerusW/searchlens
 cd searchlens
-# load via about:debugging as described above
 ```
 
 Branches follow the [Praxisum-Facta git guidelines](https://github.com/GitAlexein/Praxisum-Facta/blob/alpha-development/GIT_GUIDELINES.md): all work on `feature/`, `fix/`, `style/`, `refactor/`, or `docs/` branches off `main`, merged via PR.

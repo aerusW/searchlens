@@ -1,0 +1,64 @@
+<svg width="300" height="576" xmlns="http://www.w3.org/2000/svg">
+<rect width="300" height="576" rx="10" fill="#12121e"/>
+<rect x="0" y="0" width="300" height="48" rx="10" fill="#1a1a2e" />
+<rect x="0" y="38" width="300" height="10" rx="0" fill="#1a1a2e" />
+<rect x="0" y="47" width="300" height="1" rx="0" fill="#2a2a3e" />
+<circle cx="24" cy="24" r="8" fill="none" stroke="#00bcd4" stroke-width="2.2"/>
+<line x1="30" y1="30" x2="38" y2="38" stroke="#00bcd4" stroke-width="2.8" stroke-linecap="round"/>
+<text x="46" y="29" fill="#00bcd4" font-size="15" font-weight="600" text-anchor="start"  font-family="system-ui,-apple-system,sans-serif">SearchLens</text>
+<rect x="0" y="48" width="300" height="26" rx="0" fill="#0e0e1a" />
+<rect x="0" y="73" width="300" height="1" rx="0" fill="#1c1c2e" />
+<text x="14" y="65" fill="#555" font-size="10" font-weight="600" text-anchor="start" letter-spacing="1" font-family="system-ui,-apple-system,sans-serif">PAGE FILTERS</text>
+<rect x="0" y="74" width="300" height="42" rx="0" fill="#12121e" />
+<rect x="0" y="115" width="300" height="1" rx="0" fill="#1c1c2e" />
+<text x="14" y="99" fill="#e0e0e0" font-size="13" font-weight="normal" text-anchor="start"  font-family="system-ui,-apple-system,sans-serif">Hide sponsored</text>
+<rect x="248" y="85" width="38" height="20" rx="10" fill="#00838f"/><circle cx="277" cy="95" r="7" fill="#00e5ff"/>
+<rect x="0" y="116" width="300" height="42" rx="0" fill="#12121e" />
+<rect x="0" y="157" width="300" height="1" rx="0" fill="#1c1c2e" />
+<text x="14" y="141" fill="#e0e0e0" font-size="13" font-weight="normal" text-anchor="start"  font-family="system-ui,-apple-system,sans-serif">Hide products</text>
+<rect x="248" y="127" width="38" height="20" rx="10" fill="#2a2a3e"/><circle cx="257" cy="137" r="7" fill="#555"/>
+<rect x="0" y="158" width="300" height="42" rx="0" fill="#12121e" />
+<rect x="0" y="199" width="300" height="1" rx="0" fill="#1c1c2e" />
+<text x="14" y="183" fill="#e0e0e0" font-size="13" font-weight="normal" text-anchor="start"  font-family="system-ui,-apple-system,sans-serif">Show images</text>
+<rect x="248" y="169" width="38" height="20" rx="10" fill="#00838f"/><circle cx="277" cy="179" r="7" fill="#00e5ff"/>
+<rect x="0" y="200" width="300" height="86" rx="0" fill="#12121e" />
+<rect x="0" y="285" width="300" height="1" rx="0" fill="#1c1c2e" />
+<text x="14" y="216" fill="#555" font-size="10" font-weight="600" text-anchor="start" letter-spacing="1" font-family="system-ui,-apple-system,sans-serif">DOMAIN</text>
+<text x="76" y="216" fill="#3a3a5a" font-size="10" font-weight="normal" text-anchor="start"  font-family="system-ui,-apple-system,sans-serif">(show only)</text>
+<rect x="14" y="224" width="48" height="22" rx="11" fill="#003d44" stroke="#00bcd4" stroke-width="1"/><text x="38" y="239" fill="#00e5ff" font-size="11" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">.com</text>
+<rect x="68" y="224" width="41" height="22" rx="11" fill="#003d44" stroke="#00bcd4" stroke-width="1"/><text x="88" y="239" fill="#00e5ff" font-size="11" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">.it</text>
+<rect x="115" y="224" width="41" height="22" rx="11" fill="#1e1e30" stroke="#2a2a3e" stroke-width="1"/><text x="135" y="239" fill="#aaa" font-size="11" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">.be</text>
+<rect x="14" y="254" width="210" height="24" rx="5" fill="#1e1e30" stroke="#2a2a3e" stroke-width="1"/>
+<text x="22" y="270" fill="#444" font-size="11" font-weight="normal" text-anchor="start"  font-family="system-ui,-apple-system,sans-serif">Add domain…</text>
+<rect x="232" y="254" width="28" height="24" rx="5" fill="#1e1e30" stroke="#2a2a3e" stroke-width="1"/>
+<text x="246" y="270" fill="#00bcd4" font-size="15" font-weight="normal" text-anchor="middle"  font-family="system-ui,-apple-system,sans-serif">+</text>
+<rect x="0" y="286" width="300" height="26" rx="0" fill="#0e0e1a" />
+<rect x="0" y="311" width="300" height="1" rx="0" fill="#1c1c2e" />
+<text x="14" y="303" fill="#555" font-size="10" font-weight="600" text-anchor="start" letter-spacing="1" font-family="system-ui,-apple-system,sans-serif">SEARCH FILTERS</text>
+<text x="286" y="303" fill="#3a3a5a" font-size="10" font-weight="normal" text-anchor="end"  font-family="system-ui,-apple-system,sans-serif">requires Apply</text>
+<rect x="0" y="312" width="300" height="72" rx="0" fill="#12121e" />
+<rect x="0" y="383" width="300" height="1" rx="0" fill="#1c1c2e" />
+<text x="14" y="328" fill="#555" font-size="10" font-weight="600" text-anchor="start" letter-spacing="1" font-family="system-ui,-apple-system,sans-serif">FILE TYPE</text>
+<text x="82" y="328" fill="#3a3a5a" font-size="10" font-weight="normal" text-anchor="start"  font-family="system-ui,-apple-system,sans-serif">(show only)</text>
+<rect x="14" y="336" width="41" height="22" rx="11" fill="#1e1e30" stroke="#2a2a3e" stroke-width="1"/><text x="34" y="351" fill="#aaa" font-size="11" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">PDF</text>
+<rect x="60" y="336" width="41" height="22" rx="11" fill="#1e1e30" stroke="#2a2a3e" stroke-width="1"/><text x="80" y="351" fill="#aaa" font-size="11" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">DOC</text>
+<rect x="106" y="336" width="41" height="22" rx="11" fill="#1e1e30" stroke="#2a2a3e" stroke-width="1"/><text x="126" y="351" fill="#aaa" font-size="11" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">XLS</text>
+<rect x="152" y="336" width="41" height="22" rx="11" fill="#1e1e30" stroke="#2a2a3e" stroke-width="1"/><text x="172" y="351" fill="#aaa" font-size="11" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">PPT</text>
+<rect x="198" y="336" width="41" height="22" rx="11" fill="#1e1e30" stroke="#2a2a3e" stroke-width="1"/><text x="218" y="351" fill="#aaa" font-size="11" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">TXT</text>
+<rect x="244" y="336" width="41" height="22" rx="11" fill="#1e1e30" stroke="#2a2a3e" stroke-width="1"/><text x="264" y="351" fill="#aaa" font-size="11" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">CSV</text>
+<rect x="0" y="384" width="300" height="50" rx="0" fill="#12121e" />
+<rect x="0" y="433" width="300" height="1" rx="0" fill="#1c1c2e" />
+<text x="14" y="400" fill="#555" font-size="10" font-weight="600" text-anchor="start" letter-spacing="1" font-family="system-ui,-apple-system,sans-serif">LANGUAGE</text>
+<rect x="14" y="406" width="272" height="22" rx="5" fill="#1e1e30" stroke="#2a2a3e" stroke-width="1"/>
+<text x="22" y="421" fill="#888" font-size="12" font-weight="normal" text-anchor="start"  font-family="system-ui,-apple-system,sans-serif">Any</text>
+<text x="280" y="421" fill="#666" font-size="11" font-weight="normal" text-anchor="end"  font-family="system-ui,-apple-system,sans-serif">▾</text>
+<rect x="0" y="434" width="300" height="56" rx="0" fill="#12121e" />
+<rect x="0" y="489" width="300" height="1" rx="0" fill="#1c1c2e" />
+<text x="14" y="450" fill="#555" font-size="10" font-weight="600" text-anchor="start" letter-spacing="1" font-family="system-ui,-apple-system,sans-serif">SITE</text>
+<rect x="14" y="456" width="272" height="22" rx="5" fill="#1e1e30" stroke="#2a2a3e" stroke-width="1"/>
+<text x="22" y="471" fill="#444" font-size="12" font-weight="normal" text-anchor="start"  font-family="system-ui,-apple-system,sans-serif">example.com</text>
+<text x="14" y="486" fill="#444" font-size="10" font-weight="normal" text-anchor="start"  font-family="system-ui,-apple-system,sans-serif">Show results only from this site</text>
+<rect x="0" y="490" width="300" height="48" rx="0" fill="#0e0e1a" />
+<rect x="14" y="500" width="272" height="30" rx="5" fill="#003d44" stroke="#00838f" stroke-width="1"/>
+<text x="150" y="519" fill="#00e5ff" font-size="12" font-weight="600" text-anchor="middle"  font-family="system-ui,-apple-system,sans-serif">Apply to search</text>
+</svg>
