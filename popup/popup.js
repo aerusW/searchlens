@@ -16,7 +16,50 @@ document.addEventListener('DOMContentLoaded', async () => {
   initImages(s);
   initFiletypes(s);
   initLanguage(s);
+  initDomains(s);
 });
+
+function renderDomainChips(domains) {
+  const container = document.getElementById('domainChips');
+  container.innerHTML = '';
+  domains.forEach(d => {
+    const chip = document.createElement('span');
+    chip.className = 'sl-chip-rm';
+    chip.textContent = d;
+    const btn = document.createElement('button');
+    btn.textContent = '×';
+    btn.title = 'Remove';
+    btn.addEventListener('click', async () => {
+      const s = await load();
+      const updated = s.domains.filter(x => x !== d);
+      await save({ domains: updated });
+      renderDomainChips(updated);
+    });
+    chip.appendChild(btn);
+    container.appendChild(chip);
+  });
+}
+
+function initDomains(s) {
+  renderDomainChips(s.domains);
+  const input = document.getElementById('domainInput');
+  const addBtn = document.getElementById('domainAdd');
+
+  async function addDomain() {
+    let val = input.value.trim().toLowerCase();
+    if (!val) return;
+    if (!val.startsWith('.')) val = '.' + val;
+    const current = await load();
+    if (current.domains.includes(val)) { input.value = ''; return; }
+    const updated = [...current.domains, val];
+    await save({ domains: updated });
+    renderDomainChips(updated);
+    input.value = '';
+  }
+
+  addBtn.addEventListener('click', addDomain);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') addDomain(); });
+}
 
 function initLanguage(s) {
   const el = document.getElementById('language');
