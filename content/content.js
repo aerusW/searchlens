@@ -7,6 +7,12 @@ const DEFAULTS = {
   siteFilter:    '',
 };
 
+const IMAGE_SELECTORS = {
+  google:     ['g-section-with-header .ULSxyf', '.YiHbdc'],
+  duckduckgo: ['.zci--images'],
+  bing:       ['#vm-web'],
+};
+
 const SPONSORED_SELECTORS = {
   google: [
     '#tads', '#tadsb', '[data-text-ad]',
@@ -59,8 +65,19 @@ function applySponsored() {
   }
 }
 
+// --- Images ---
+function applyImages() {
+  const sels = IMAGE_SELECTORS[engine];
+  if (!sels) return;
+  for (const sel of sels) {
+    document.querySelectorAll(sel).forEach(el =>
+      el.classList.toggle('searchlens-hidden', !settings.showImages));
+  }
+}
+
 function applyDOM() {
   applySponsored();
+  applyImages();
 }
 
 function applyURLParams() {
