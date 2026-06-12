@@ -141,6 +141,20 @@ function applyURLParams() {
     changed = true;
   }
 
+  // Site filter (appends site:X to the query)
+  const q = url.searchParams.get('q') || '';
+  const currentSite = (q.match(/(?:^|\s)site:(\S+)/i) || [])[0] || '';
+  const wantedSite  = settings.siteFilter ? ` site:${settings.siteFilter}` : '';
+
+  if (wantedSite && !currentSite.includes(settings.siteFilter)) {
+    const cleanQ = q.replace(/\s*site:\S+/gi, '').trim();
+    url.searchParams.set('q', (cleanQ + wantedSite).trim());
+    changed = true;
+  } else if (!wantedSite && currentSite) {
+    url.searchParams.set('q', q.replace(/\s*site:\S+/gi, '').trim());
+    changed = true;
+  }
+
   if (changed) location.replace(url.toString());
 }
 

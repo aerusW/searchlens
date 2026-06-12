@@ -17,7 +17,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   initFiletypes(s);
   initLanguage(s);
   initDomains(s);
+  initSiteFilter(s);
 });
+
+function initSiteFilter(s) {
+  const el = document.getElementById('siteFilter');
+  el.value = s.siteFilter;
+  let timer;
+  el.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => save({ siteFilter: el.value.trim() }), 400);
+  });
+}
 
 function renderDomainChips(domains) {
   const container = document.getElementById('domainChips');
