@@ -13,7 +13,14 @@ async function save(updates) { return browser.storage.local.set(updates);  }
 document.addEventListener('DOMContentLoaded', async () => {
   const s = await load();
   initSponsored(s);
+  initImages(s);
 });
+
+function initImages(s) {
+  const el = document.getElementById('showImages');
+  el.checked = s.showImages;
+  el.addEventListener('change', () => save({ showImages: el.checked }));
+}
 
 function initSponsored(s) {
   const el = document.getElementById('hideSponsored');
