@@ -1,10 +1,11 @@
 const DEFAULTS = {
-  hideSponsored: true,
-  showImages:    true,
-  filetypes:     [],
-  language:      '',
-  domains:       [],
-  siteFilter:    '',
+  hideSponsored:  true,
+  showImages:     true,
+  hideProducts:   false,
+  filetypes:      [],
+  language:       '',
+  domains:        [],
+  siteFilter:     '',
 };
 
 // ── Sponsored selectors ─────────────────────────────────────────────────────
@@ -106,6 +107,11 @@ function applySponsored() {
   }
 }
 
+// ── Product selectors ───────────────────────────────────────────────────────
+const PRODUCT_SELECTORS = {
+  google: ['product-viewer-group'],
+};
+
 // ── Filter: images ──────────────────────────────────────────────────────────
 function applyImages() {
   const sels = IMAGE_SELECTORS[engine];
@@ -118,6 +124,18 @@ function applyImages() {
   }
 }
 
+
+// ── Filter: products ────────────────────────────────────────────────────────
+function applyProducts() {
+  const sels = PRODUCT_SELECTORS[engine];
+  if (!sels) return;
+  for (const sel of sels) {
+    try {
+      document.querySelectorAll(sel).forEach(el =>
+        el.classList.toggle('searchlens-hidden', settings.hideProducts));
+    } catch { /* invalid selector */ }
+  }
+}
 
 // ── Filter: domains ─────────────────────────────────────────────────────────
 function applyDomains() {
@@ -197,6 +215,7 @@ function applyURLParams() {
 function applyDOM() {
   applySponsored();
   applyImages();
+  applyProducts();
   applyDomains();
 }
 
