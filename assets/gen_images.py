@@ -102,53 +102,74 @@ with open(r'C:\Users\Francesco\Documents\Projects\searchlens\assets\panel.svg','
 print('panel.svg done, height',y+48)
 
 # ── overview.svg ─────────────────────────────────────────────────────────────
-W2,H2 = 640,480
+# Two-column layout: zones on left (ZX=10, ZW=420), legend on right (LX=460).
+# Canvas is 760px wide so the two columns never overlap.
+W2, H2 = 760, 480
+ZX, ZW = 10, 420   # zone column bounds
+LX      = 460      # legend column start
+
 L2 = [f'<svg width="{W2}" height="{H2}" xmlns="http://www.w3.org/2000/svg">',
       f'<rect width="{W2}" height="{H2}" fill="#12121e" rx="12"/>',
-      txt(W2//2,28,'What SearchLens hides on Google Search','#00bcd4',size=14,weight='600',anchor='middle')]
+      txt(W2//2, 28, 'What SearchLens filters on Google Search',
+          '#00bcd4', size=14, weight='600', anchor='middle')]
 
-def zone(x,y,w,h,color,alpha,label,sub=''):
-    lw = len(label)*7+16; lh=20; lx=x+w+8; ly=y+h//2-lh//2
-    out  = f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="4" fill="{color}" fill-opacity="{alpha}" stroke="{color}" stroke-width="1.5" stroke-opacity="0.7"/>'
-    out += f'<rect x="{lx}" y="{ly}" width="{lw}" height="{lh}" rx="10" fill="{color}" fill-opacity="0.85"/>'
-    out += f'<text x="{lx+lw//2}" y="{ly+13}" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">{label}</text>'
-    if sub:
-        out += f'<text x="{lx+lw//2}" y="{ly+lh+11}" fill="{color}" font-size="9" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" fill-opacity="0.85">{sub}</text>'
-    return out
+def zone_rect(x, y, w, h, color, alpha):
+    return (f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="4" '
+            f'fill="{color}" fill-opacity="{alpha}" '
+            f'stroke="{color}" stroke-width="1.5" stroke-opacity="0.6"/>')
 
-L2.append(zone(10,44,460,12,'#888',0.3,'slim_appbar','always hidden'))
-L2.append(zone(10,62,460,58,'#ff5252',0.2,'Sponsored','Hide sponsored toggle'))
+# slim_appbar — narrow grey divider at top
+L2.append(zone_rect(ZX, 44, ZW, 12, '#888', 0.35))
+
+# Sponsored — two ad-like blocks
+L2.append(zone_rect(ZX, 62, ZW, 58, '#ff5252', 0.18))
+for i in range(2):
+    ay = 68 + i * 26
+    L2 += [f'<rect x="20" y="{ay}" width="200" height="9" rx="3" fill="#ff5252" fill-opacity="0.45"/>',
+           f'<rect x="20" y="{ay+12}" width="340" height="6" rx="3" fill="#ff5252" fill-opacity="0.2"/>']
+
+# Organic results — three blocks
 for i in range(3):
-    ry=132+i*56
-    L2 += [f'<rect x="10" y="{ry}" width="460" height="48" rx="4" fill="#1e2d1e" fill-opacity="0.5" stroke="#4caf50" stroke-width="1" stroke-opacity="0.4"/>',
+    ry = 132 + i * 56
+    L2 += [f'<rect x="{ZX}" y="{ry}" width="{ZW}" height="48" rx="4" '
+           f'fill="#1e2d1e" fill-opacity="0.5" stroke="#4caf50" stroke-width="1" stroke-opacity="0.4"/>',
            f'<rect x="20" y="{ry+8}" width="180" height="9" rx="3" fill="#4caf50" fill-opacity="0.5"/>',
-           f'<rect x="20" y="{ry+23}" width="320" height="7" rx="3" fill="#2e3d2e" fill-opacity="0.8"/>',
-           f'<rect x="20" y="{ry+35}" width="220" height="7" rx="3" fill="#2e3d2e" fill-opacity="0.8"/>']
-L2.append(f'<text x="16" y="{132+3*56//2+40}" fill="#4caf50" font-size="10" font-family="system-ui,-apple-system,sans-serif" fill-opacity="0.7">Regular results — always visible</text>')
-L2.append(zone(10,302,460,50,'#42a5f5',0.2,'Images','.Lv2Cle toggle'))
-for i in range(6):
-    L2.append(f'<rect x="{18+i*72}" y="312" width="62" height="32" rx="3" fill="#42a5f5" fill-opacity="0.2"/>')
-L2.append(zone(10,360,460,68,'#ff9800',0.2,'Products','Hide products toggle'))
-for i in range(4):
-    px=18+i*108
-    L2 += [f'<rect x="{px}" y="370" width="98" height="50" rx="3" fill="#ff9800" fill-opacity="0.18"/>',
-           f'<rect x="{px+6}" y="376" width="86" height="26" rx="2" fill="#ff9800" fill-opacity="0.12"/>',
-           f'<rect x="{px+6}" y="406" width="60" height="7" rx="2" fill="#ff9800" fill-opacity="0.28"/>']
+           f'<rect x="20" y="{ry+22}" width="320" height="6" rx="3" fill="#2e3d2e" fill-opacity="0.8"/>',
+           f'<rect x="20" y="{ry+33}" width="220" height="6" rx="3" fill="#2e3d2e" fill-opacity="0.8"/>']
 
-# Legend
-lx2,ly2 = 492,55
-L2.append(txt(lx2,ly2-12,'LEGEND','#555',size=9,weight='600',ls='1'))
-for i,(color,label,desc) in enumerate([
-    ('#888','slim_appbar','Always hidden'),
-    ('#ff5252','Sponsored','Toggle: Hide sponsored'),
-    ('#4caf50','Results','Always visible'),
-    ('#42a5f5','Images','Toggle: Show images'),
-    ('#ff9800','Products','Toggle: Hide products'),
-]):
-    iy=ly2+i*44
-    L2 += [f'<rect x="{lx2}" y="{iy}" width="12" height="12" rx="3" fill="{color}" fill-opacity="0.85"/>',
-           txt(lx2+18,iy+10,label,'#e0e0e0',size=11,weight='600'),
-           txt(lx2+18,iy+22,desc,'#555',size=9)]
+# Images strip
+L2.append(zone_rect(ZX, 302, ZW, 50, '#42a5f5', 0.18))
+for i in range(5):
+    L2.append(f'<rect x="{20+i*80}" y="312" width="70" height="32" rx="3" fill="#42a5f5" fill-opacity="0.25"/>')
+
+# Products carousel
+L2.append(zone_rect(ZX, 360, ZW, 68, '#ff9800', 0.18))
+for i in range(4):
+    px = 18 + i * 102
+    L2 += [f'<rect x="{px}" y="370" width="92" height="50" rx="3" fill="#ff9800" fill-opacity="0.18"/>',
+           f'<rect x="{px+6}" y="376" width="80" height="26" rx="2" fill="#ff9800" fill-opacity="0.12"/>',
+           f'<rect x="{px+6}" y="406" width="56" height="6" rx="2" fill="#ff9800" fill-opacity="0.28"/>']
+
+# ── Right-column legend ───────────────────────────────────────────────────────
+# Separated from zone column by 30px gap (ZX+ZW=430, LX=460).
+# Each entry: 4px colored bar | bold name on first line | dim description below.
+# 54px row height gives comfortable reading room.
+LEGEND = [
+    ('#888',    'slim_appbar', 'Always hidden — empty UI divider'),
+    ('#ff5252', 'Sponsored',   '"Hide sponsored" toggle'),
+    ('#4caf50', 'Results',     'Organic results — always visible'),
+    ('#42a5f5', 'Images',      '"Show images" toggle'),
+    ('#ff9800', 'Products',    '"Hide products" toggle'),
+]
+
+L2.append(txt(LX, 40, 'FILTER ZONES', '#555', size=9, weight='600', ls='1'))
+L2.append(f'<rect x="{LX}" y="45" width="{W2-LX-16}" height="1" fill="#2a2a3e"/>')
+
+for i, (color, name, desc) in enumerate(LEGEND):
+    ey = 56 + i * 54
+    L2.append(f'<rect x="{LX}" y="{ey}" width="4" height="38" rx="2" fill="{color}" fill-opacity="0.9"/>')
+    L2.append(txt(LX + 14, ey + 15, name,  '#e0e0e0', size=12, weight='600'))
+    L2.append(txt(LX + 14, ey + 30, desc,  '#777',    size=10))
 
 L2.append('</svg>')
 with open(r'C:\Users\Francesco\Documents\Projects\searchlens\assets\overview.svg','w',encoding='utf-8') as f:
