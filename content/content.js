@@ -96,10 +96,32 @@ function applyFiletypes() {
   });
 }
 
+// --- Domains ---
+function applyDomains() {
+  const results = getResultElements();
+  results.forEach(el => {
+    if (!settings.domains.length) {
+      if (el.dataset.slDomain) {
+        el.classList.remove('searchlens-hidden');
+        delete el.dataset.slDomain;
+      }
+      return;
+    }
+    const url = getResultURL(el);
+    if (!url) return;
+    const host = url.hostname;
+    const matches = settings.domains.some(d => host.endsWith(d));
+    el.classList.toggle('searchlens-hidden', !matches);
+    if (!matches) el.dataset.slDomain = '1';
+    else delete el.dataset.slDomain;
+  });
+}
+
 function applyDOM() {
   applySponsored();
   applyImages();
   applyFiletypes();
+  applyDomains();
 }
 
 function applyURLParams() {
