@@ -12,6 +12,11 @@ async function save(updates) { return browser.storage.local.set(updates);  }
 
 document.addEventListener('DOMContentLoaded', async () => {
   const s = await load();
-  // feature init functions called here
-  void s;
+  initSponsored(s);
+});
+
+function initSponsored(s) {
+  const el = document.getElementById('hideSponsored');
+  el.checked = s.hideSponsored;
+  el.addEventListener('change', () => save({ hideSponsored: el.checked }));
 });
