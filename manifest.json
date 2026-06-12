@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "SearchLens",
+  "version": "1.0.0",
+  "description": "Refine your search results — hide sponsored content and more.",
+  "icons": {
+    "16":  "icons/icon-16.png",
+    "48":  "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.google.com/search*",
+        "*://www.google.it/search*",
+        "*://www.google.co.uk/search*",
+        "*://www.google.de/search*",
+        "*://www.google.fr/search*",
+        "*://www.google.be/search*",
+        "*://duckduckgo.com/*",
+        "*://www.bing.com/search*",
+        "*://search.brave.com/search*",
+        "*://search.yahoo.com/search*"
+      ],
+      "js":  ["content/content.js"],
+      "css": ["content/content.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "searchlens@serangeli",
+      "strict_min_version": "109.0"
+    }
+  }
+}
