@@ -118,24 +118,6 @@ function applyImages() {
   }
 }
 
-// ── Filter: file types ──────────────────────────────────────────────────────
-function applyFiletypes() {
-  const results = getResultElements();
-  results.forEach(el => {
-    if (!settings.filetypes.length) {
-      el.classList.remove('searchlens-hidden');
-      delete el.dataset.slFiletype;
-      return;
-    }
-    const url = getResultURL(el);
-    if (!url) return;
-    const path = url.pathname.toLowerCase();
-    const hit  = settings.filetypes.some(ext => path.endsWith('.' + ext));
-    el.classList.toggle('searchlens-hidden', !hit);
-    if (!hit) el.dataset.slFiletype = '1';
-    else delete el.dataset.slFiletype;
-  });
-}
 
 // ── Filter: domains ─────────────────────────────────────────────────────────
 function applyDomains() {
@@ -191,6 +173,23 @@ function applyURLParams() {
     changed = true;
   }
 
+  // File types — adds filetype:pdf OR filetype:doc … to the query
+  const ftOps = settings.filetypes.map(f => `filetype:${f}`);
+  const ftRe  = /\s*\(filetype:[^)]+\)|\s*filetype:\S+/gi;
+  const qNoFt = q.replace(ftRe, '').trim();
+
+  if (ftOps.length) {
+    const ftStr = ftOps.length === 1 ? ftOps[0] : `(${ftOps.join(' OR ')})`;
+    const alreadySet = settings.filetypes.every(f => q.includes(`filetype:${f}`));
+    if (!alreadySet) {
+      url.searchParams.set('q', `${qNoFt} ${ftStr}`.trim());
+      changed = true;
+    }
+  } else if (ftRe.test(q)) {
+    url.searchParams.set('q', qNoFt);
+    changed = true;
+  }
+
   if (changed) location.replace(url.toString());
 }
 
@@ -198,7 +197,6 @@ function applyURLParams() {
 function applyDOM() {
   applySponsored();
   applyImages();
-  applyFiletypes();
   applyDomains();
 }
 
